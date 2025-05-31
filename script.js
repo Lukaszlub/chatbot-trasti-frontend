@@ -1,10 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const chatWindow = document.getElementById('chat-window');
   const userInput = document.getElementById('user-input');
   const sendBtn = document.getElementById('send-btn');
 
+  // Wyślij wiadomość po kliknięciu lub naciśnięciu Enter
   sendBtn.addEventListener('click', sendMessage);
-  userInput.addEventListener('keypress', function(e) {
+  userInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
       sendMessage();
     }
@@ -25,15 +26,15 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       body: JSON.stringify({ question: message })
     })
-    .then(response => response.json())
-    .then(data => {
-      const reply = data.answer || 'Brak odpowiedzi.';
-      appendMessage('bot', reply);
-    })
-    .catch(error => {
-      console.error('Błąd:', error);
-      appendMessage('bot', 'Błąd serwera.');
-    });
+      .then(response => response.json())
+      .then(data => {
+        const reply = data.answer || data.response || 'Brak odpowiedzi od bota.';
+        appendMessage('bot', reply);
+      })
+      .catch(error => {
+        console.error('Błąd podczas pobierania odpowiedzi:', error);
+        appendMessage('bot', '⚠️ Wystąpił błąd po stronie serwera.');
+      });
   }
 
   function appendMessage(sender, text) {
