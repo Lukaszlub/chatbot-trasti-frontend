@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     userInput.value = '';
     userInput.focus();
 
-    fetch("https://twoj-backend.onrender.com/ask", {
+    fetch("https://trasti-chatbot.onrender.com/ask", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
